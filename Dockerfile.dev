@@ -1,0 +1,13 @@
+FROM node:alpine
+
+WORKDIR /app
+
+COPY package.json .
+
+RUN npm install
+
+#Following line may not be needed when we use volumes to reference /app to local machine's current folder
+#Leaving this line does not harm though and will be use in future when NOT using docker-compose or volumes
+COPY . .
+
+CMD [ "npm", "run", "start" ]

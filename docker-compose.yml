@@ -1,0 +1,26 @@
+#Creating this compose file replaces running the docker command "docker run -p 3000:3000 -v /app/node_modules -v $(pwd):/app -it <image ID created by building(docker build -f Dockerfile.dev .) using the Dockerfile.dev file>"
+version: '3'
+
+services:
+  web:
+    #build: . is replaced with following syntax as our docker file is called Dockerfile.dev(as opposed to just Dockerfile)
+    build:
+      context: .
+      dockerfile: Dockerfile.dev
+    ports:
+      - "3000:3000"
+    volumes:
+      #Don't do any mapping for /app/node_modules which is present inside container
+      - /app/node_modules
+      #map current folder inside host to /app inside container
+      - .:/app
+  tests:
+    build:
+      context: .
+      dockerfile: Dockerfile.dev
+
+    volumes:
+      - /app/node_modules
+      - .:/app
+    #To specify a command that overrides the default command/process:
+    command: ['npm', 'run', 'test']
