@@ -7,4 +7,4 @@ before_install:
 
 script:
 #-- --coverage is needed so that npm run test does not sit there waiting for user input after running this will ensure npm run test runs and then exits
-  - docker run pancham2020/node-react npm run test -- --coverage --exit
+  - docker run -e CI=true pancham2020/node-react npm run test -- --coverage
