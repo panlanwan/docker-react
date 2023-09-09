@@ -8,3 +8,22 @@ before_install:
 script:
 #-- --coverage is needed so that npm run test does not sit there waiting for user input after running this will ensure npm run test runs and then exits
   - docker run -e CI=true pancham2020/node-react npm run test -- --coverage
+
+deploy:
+  provider: elasticbeanstalk
+  #Get region from AWS beanstack console environment to the VM i.e. http://node-react-env-2.eba-3uvxfw6c.us-west-1.elasticbeanstalk.com/ in my case 
+  region: "us-west-1"
+  #GEt this from the AWS beanstack console > Click on the env and look for "application name" under Environment overview
+  app: "node-react"
+  env: "Node-react-env-2"
+  #Get bucket name from AWS console > S3(https://s3.console.aws.amazon.com/s3/home?region=us-west-1#) > lookout for a bucket that starts with the above region name
+  bucket_name: "elasticbeanstalk-us-west-1-123249151393"
+  #Bucket path(path inside the above bucket) is the same as app name because once the app is deployed, a folder with name - app name is created inside the above S3 bucket
+  bucket_path: "node-react"
+  #We tell Travis to deploy this app only when code is pushed to the master branch on Github:
+  on:
+    branch: master
+  #Get folowing values from Travis CI env vars that we setup in travis CI settings
+  access_key_id: $AWS_ACCESS_KEY
+  secret_access_key:
+    secure: "$AWS_SECRET_KEY"
