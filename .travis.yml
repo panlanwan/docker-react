@@ -25,5 +25,4 @@ deploy:
     branch: main
   #Get folowing values from Travis CI env vars that we setup in travis CI settings
   access_key_id: $AWS_ACCESS_KEY
-  secret_access_key:
-    secure: "$AWS_SECRET_KEY"
+  secret_access_key: $AWS_SECRET_KEY
