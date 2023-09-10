@@ -3,7 +3,7 @@ services:
   - docker
 
 before_install:
-  - docker build -t pancham2020/node-react -f Dockerfile.dev .
+  - docker build -t pancham2020/node-react .
 
 script:
 #-- --coverage is needed so that npm run test does not sit there waiting for user input after running this will ensure npm run test runs and then exits
@@ -20,7 +20,7 @@ deploy:
   bucket_name: "elasticbeanstalk-us-west-1-123249151393"
   #Bucket path(path inside the above bucket) is the same as app name because once the app is deployed, a folder with name - app name is created inside the above S3 bucket
   bucket_path: "node-react"
-  #We tell Travis to deploy this app only when code is pushed to the master branch on Github:
+  #We tell Travis to deploy this app only when code is pushed to the main branch on Github:
   on:
     branch: main
   #Get folowing values from Travis CI env vars that we setup in travis CI settings
