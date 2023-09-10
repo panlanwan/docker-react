@@ -14,12 +14,12 @@ deploy:
   #Get region from AWS beanstack console environment to the VM i.e. http://node-react-env-2.eba-3uvxfw6c.us-west-1.elasticbeanstalk.com/ in my case 
   region: "us-west-1"
   #GEt this from the AWS beanstack console > Click on the env and look for "application name" under Environment overview
-  app: "node-react"
-  env: "Node-react-env-2"
+  app: "docker-react-1"
+  env: "Docker-react-1-env"
   #Get bucket name from AWS console > S3(https://s3.console.aws.amazon.com/s3/home?region=us-west-1#) > lookout for a bucket that starts with the above region name
   bucket_name: "elasticbeanstalk-us-west-1-123249151393"
   #Bucket path(path inside the above bucket) is the same as app name because once the app is deployed, a folder with name - app name is created inside the above S3 bucket
-  bucket_path: "node-react"
+  bucket_path: "docker-react-1"
   #We tell Travis to deploy this app only when code is pushed to the main branch on Github:
   on:
     branch: main
